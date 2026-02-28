@@ -8,23 +8,29 @@ import CustomSpinner from "../CustomSpinner"
 export default function Weather() {
   const searchParams = useSearchParams()
   const searchedCity = searchParams.get('searchCity')
+  const lat = searchParams.get('lat')
+  const lon = searchParams.get('lon')
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['weather', searchedCity],
+    queryKey: ['weather', searchedCity, lat, lon],
     queryFn: async () => {
-      const response = await axios.get(`/api/weather?city=${searchedCity}`)
+      const endpoint = lat && lon
+        ? `/api/weather?lat=${lat}&lon=${lon}`
+        : `/api/weather?city=${searchedCity}`
+      
+      const response = await axios.get(endpoint)
       return response.data
     },
-    enabled: !!searchedCity
+    enabled: !!searchedCity || (!!lat && !!lon)
   })
 
-  if (!searchedCity) return <div>There is no such city</div>
+  if (!searchedCity && (!lat && !lon)) return <div>Location not found</div>
   if (isLoading) return <div> <CustomSpinner /> </div>
   if (error) return <div>Error occured</div>
 
   return (
     <div>
-
+      
     </div>
   )
 }

@@ -1,10 +1,16 @@
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const city = searchParams.get('city')
+  const lat = searchParams.get('lat')
+  const lon = searchParams.get('lon')
 
-  if (!city) {
+  const locationIdentifier = lat && lon
+    ? `${lat},${lon}`
+    : city
+
+  if (!locationIdentifier) {
     return Response.json(
-      { error: 'Please provide a city name' },
+      { error: 'Please provide a location' },
       { status: 400 }
     )
   }
@@ -21,7 +27,7 @@ export async function GET(request: Request) {
 
   try {
     const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=${API_KEY}&contentType=json`,
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${locationIdentifier}?unitGroup=metric&key=${API_KEY}&contentType=json`,
       { next: { revalidate: 3600 } } // Cache for 1 hour
     )
 
