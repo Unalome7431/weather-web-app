@@ -25,7 +25,14 @@ export default function Weather() {
   })
 
   if (!searchedCity && (!lat && !lon)) return <div>Location not found</div>
-  if (isLoading) return <div> <CustomSpinner /> </div>
+  if (isLoading) {
+    return (
+      <div className="h-dvh flex flex-col gap-2 justify-center items-center"> 
+        <CustomSpinner />
+        Loading
+      </div>
+    )
+  }
   if (error) return <div>Error occured</div>
 
   return (

@@ -4,6 +4,7 @@ import { useState } from "react";
 import CustomButton from "./components/CustomButton";
 import { SearchIcon, Locate } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Home() {
   const [city, setCity] = useState('')
@@ -32,22 +33,22 @@ export default function Home() {
   }
 
   return (
-    <section className="flex flex-col items-center justify-center h-dvh bg-linear-to-br from-20% via-60% to-90% from-yellow-100 via-blue-400 to-blue-600">
-      <h1 className="text-center mt-auto mb-10">WeaPredict</h1>
-      <div className="bg-neutral-400/20 border-2 border-neutral-200/70 p-5 pt-10 rounded-2xl mb-[40dvh]">
-        <div className="flex gap-5 flex-col">
-          <h2 className="text-center">Input Location to Display</h2>
-
-          <form onSubmit={handleSearch} className="flex flex-col items-center gap-1">
-            <input required type="text" value={city} onChange={handleInput} className="bg-neutral-100 h-10 rounded-2xl p-2 w-full"/>
-            <CustomButton leftIcon={<SearchIcon />} type="submit">
-              Search
-            </CustomButton>
-          </form>
-          <CustomButton leftIcon={<Locate />} type="button" onClick={handleCurrentLocation}>
-            Use Current Location
-          </CustomButton>
+    <section className="flex flex-col items-center justify-center h-screen overflow-hidden bg-layer">
+      <div className="bg-main shadow-lg hover:shadow-2xl p-5 pt-10 rounded-2xl hover:scale-102 ease-in transition-all px-100 lg:px-5">
+        <div className="flex gap-3 justify-center mb-10">
+          <Image src="/weather-app-icon/partly-cloudy-day.svg" alt="Logo" width={100} height={100} />
+          <h1 className="text-center text-3xl mt-5 font-mulish font-bold">WeaPredict</h1>
         </div>
+
+        <form onSubmit={handleSearch} className="flex items-center gap-1 mb-2 w-100">
+          <input required type="text" placeholder="Input Location to Display" value={city} onChange={handleInput} className="bg-neutral-200 focus:outline-highlight h-10 rounded-xl p-4 w-full shadow-lg"/>
+          <CustomButton leftIcon={<SearchIcon />} type="submit" variant="gradient" className="text-main">
+            Search
+          </CustomButton>
+        </form>
+        <CustomButton leftIcon={<Locate className="text-highlight"/>} type="button" onClick={handleCurrentLocation} className="w-full">
+          Use Current Location
+        </CustomButton>
       </div>
     </section>
   );

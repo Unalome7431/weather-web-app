@@ -5,13 +5,14 @@ import { cn } from "../utils/utils"
 import { ReactNode } from "react"
 
 const buttonVariants = cva(
-  "inline-flex gap-2 justify-center items-center rounded-xl border",
+  "inline-flex gap-2 justify-center items-center rounded-xl shadow-lg active:scale-98",
   {
     variants: {
       variant: {
         danger: "bg-red-500",
         normal: "bg-blue-400",
-        glass: "bg-gray-300/50 hover:bg-gray-400/50 backdrop-blur-xl"
+        glass: "bg-gray-400/30 hover:bg-gray-400/50 backdrop-blur-xl transition-color hover:ease-in-out duration-300 active:transition-none",
+        gradient: "gradient-animated hover:gradient-after"
       },
       size: {
         sm: "h-8 px-3 text-xs",

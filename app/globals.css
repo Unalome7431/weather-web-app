@@ -1,1 +1,36 @@
 @import "tailwindcss";
+
+@theme {
+  --font-noto: var(--font-noto-sans);
+  --font-mulish: var(--font-mulish);
+
+  --color-main: #F4F4F4;
+  --color-layer: #D8D8D8;
+  --color-highlight: #249E94;
+}
+
+@utility gradient-background {
+  background: linear-gradient(
+    to bottom right,
+    #3BC1A8,
+    #249E94,
+    #0C7779,
+    #005461
+  )
+}
+
+@property --gradient-stop-1 {
+  syntax: '<color>';
+  initial-value: #3BC1A8;
+  inherits: false;
+}
+
+@utility gradient-animated {
+  background: linear-gradient(to bottom right, var(--gradient-stop-1), #0C7779);
+  transition: --gradient-stop-1 0.2s ease-in-out;
+}
+
+/* On hover, change the variable value */
+.hover\:gradient-after:hover {
+  --gradient-stop-1: #005461; /* Example: Fade the start to white */
+}

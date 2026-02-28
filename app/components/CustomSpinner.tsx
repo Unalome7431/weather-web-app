@@ -22,7 +22,8 @@ const innerCircleVariants = cva(
     variants: {
       variant: {
         pink: "border-pink-300 border-t-pink-500",
-        blue: "border-blue-300 border-t-blue-500"
+        blue: "border-blue-300 border-t-blue-500",
+        highlight: "border-[#3BC1A8]/30 border-t-highlight"
       },
       size: {
         xs: "w-5 h-5",
@@ -34,7 +35,7 @@ const innerCircleVariants = cva(
       }
     },
     defaultVariants: {
-      variant: "blue",
+      variant: "highlight",
       size: "md",
       animate: "linear"
     }
