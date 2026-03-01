@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         danger: "bg-red-500",
         normal: "bg-blue-400",
-        glass: "bg-gray-400/30 hover:bg-gray-400/50 backdrop-blur-xl transition-color hover:ease-in-out duration-300 active:transition-none",
+        glass: "bg-gray-400/30 hover:bg-gray-400/50 backdrop-blur-xl hover:transition-color hover:ease-in-out duration-300 active:transition-none",
         gradient: "gradient-animated hover:gradient-after"
       },
       size: {

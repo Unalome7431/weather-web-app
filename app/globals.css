@@ -7,6 +7,9 @@
   --color-main: #F4F4F4;
   --color-layer: #D8D8D8;
   --color-highlight: #249E94;
+
+  --breakpoint-tn: 400px;
+  --breakpoint-stn: 600px;
 }
 
 @utility gradient-background {
