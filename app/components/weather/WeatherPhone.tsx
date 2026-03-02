@@ -6,10 +6,11 @@ import Form from "./Form"
 interface WeatherProps {
   data: WeatherData,
   rolling24HoursData: WeatherBase[],
+  uvindex: string,
   searchedCity?: string
 }
 
-export default function WeatherPhone({ data, rolling24HoursData, searchedCity }: WeatherProps) {
+export default function WeatherPhone({ data, rolling24HoursData, uvindex, searchedCity }: WeatherProps) {
 
   return (
     <div className="w-full min-w-3xs max-w-3xl mx-auto flex flex-col items-center gap-3 lg:hidden">
@@ -43,7 +44,7 @@ export default function WeatherPhone({ data, rolling24HoursData, searchedCity }:
               <div className="text-md tn:text-xl w-full flex-row justify-between stn:flex">
                 <span >UV Index:</span>
                 <br className="stn:hidden"/>
-                <span>{data.currentConditions.uvindex < 51 ? 'Low' : 'High'}</span>
+                <span>{uvindex}</span>
               </div>
             </div>
             <div className="flex items-center gap-3">

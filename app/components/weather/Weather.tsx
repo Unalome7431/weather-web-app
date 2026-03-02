@@ -45,10 +45,24 @@ export default function Weather() {
   const startIndex = next2DaysData.findIndex(h => h.datetime === currentHourString)
   const rolling24HoursData = next2DaysData.slice(startIndex, startIndex + 24)
 
+  let uvindex = ''
+
+  if (data.currentConditions.uvindex < 3) {
+    uvindex = 'Low'
+  } else if (data.currentConditions.uvindex < 6) {
+    uvindex = 'Moderate'
+  } else if (data.currentConditions.uvindex < 8) {
+    uvindex = 'High'
+  } else if (data.currentConditions.uvindex < 11) {
+    uvindex = 'Very High'
+  } else if (data.currentConditions.uvindex >= 11) {
+    uvindex = 'Extreme'
+  }
+  
   return (
     <>
-      <WeatherPhone data={data} rolling24HoursData={rolling24HoursData} searchedCity={searchedCity ?? undefined} />
-      <WeatherWeb data={data} rolling24HoursData={rolling24HoursData} searchedCity={searchedCity ?? undefined} />
+      <WeatherPhone data={data} rolling24HoursData={rolling24HoursData} uvindex={uvindex} searchedCity={searchedCity ?? undefined} />
+      <WeatherWeb data={data} rolling24HoursData={rolling24HoursData} uvindex={uvindex} searchedCity={searchedCity ?? undefined} />
     </>
   )
 }
