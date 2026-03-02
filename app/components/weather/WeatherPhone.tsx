@@ -21,7 +21,7 @@ export default function WeatherPhone({ data, rolling24HoursData, uvindex, search
           <span className="font-bold text-xl tn:text-2xl text-center">{searchedCity ? data.address : 'Currect Location'}</span>
           <span className="tn:text-xl text-highlight text-center">{data.currentConditions.conditions}</span>
 
-          <Image src={`/weather-app-icon/${data.currentConditions.icon}.svg`} alt={"weather-icon"} width={0} height={0} className="mt-10 mb-5 size-20 tn:size-25" />
+          <Image src={`/weather-app-icon/${data.currentConditions.icon}.svg`} alt={"weather-icon"} width={0} height={0} loading="eager" className="mt-10 mb-5 size-20 tn:size-25" />
           <span className="tn:text-4xl text-3xl mb-10 font-semibold">{data.currentConditions.temp}ºC</span>
 
           <span className="w-full bg-neutral-200 rounded-xl p-3 text-justify text-xs tn:text-sm">{data.description}</span>
@@ -72,9 +72,9 @@ export default function WeatherPhone({ data, rolling24HoursData, uvindex, search
         <div className="flex mt-3 overflow-scroll overflow-y-hidden gap-10 pb-2">
           {rolling24HoursData.map(hour => {
             return (
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center" key={crypto.randomUUID()}>
                 <span className="tn:text-lg text-md text-highlight">{hour.datetime.slice(0, -3)}</span>
-                <Image src={`/weather-app-icon/${hour.icon}.svg`} alt={"weather-icon"} width={0} height={0} className="my-2 size-10 tn:size-12" />
+                <Image src={`/weather-app-icon/${hour.icon}.svg`} alt={"weather-icon"} width={0} height={0} loading="eager" className="my-2 size-10 tn:size-12" />
                 <span className="tn:text-lg text-md font-semibold">{hour.temp}ºC</span>
               </div>
             )
@@ -90,11 +90,11 @@ export default function WeatherPhone({ data, rolling24HoursData, uvindex, search
             const dayName = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(dayDate)
 
             return (
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center" key={crypto.randomUUID()}>
                 <span className="tn:text-lg text-md text-highlight">{dayName}</span>
                 
                 <div className="flex items-center gap-5">
-                  <Image src={`/weather-app-icon/${day.icon}.svg`} alt={"weather-icon"} width={0} height={0} className="my-2 size-8 tn:size-10" />
+                  <Image src={`/weather-app-icon/${day.icon}.svg`} alt={"weather-icon"} width={0} height={0} loading="eager" className="my-2 size-8 tn:size-10" />
                   <span className="tn:text-lg text-md font-semibold w-15 text-end">{day.temp}ºC</span>
                 </div>
               </div>
@@ -108,9 +108,9 @@ export default function WeatherPhone({ data, rolling24HoursData, uvindex, search
             const dayName = new Intl.DateTimeFormat('en-US', {weekday: 'short'}).format(dayDate)
 
             return (
-              <div className="flex flex-col items-center mt-3 gap-1 pb-2">
+              <div className="flex flex-col items-center mt-3 gap-1 pb-2" key={crypto.randomUUID()}>
                 <span className="tn:text-lg text-md text-highlight">{dayName}</span>
-                <Image src={`/weather-app-icon/${day.icon}.svg`} alt={"weather-icon"} width={0} height={0} className="my-2 size-10 tn:size-12" />
+                <Image src={`/weather-app-icon/${day.icon}.svg`} alt={"weather-icon"} width={0} height={0} loading="eager" className="my-2 size-10 tn:size-12" />
                 <span className="tn:text-lg text-md font-semibold">{day.temp}ºC</span>
               </div>
             )

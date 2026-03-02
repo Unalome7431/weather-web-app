@@ -46,7 +46,7 @@ export default function WeatherWeb({ data, rolling24HoursData, uvindex, searched
           <span className="font-bold text-2xl text-center">{searchedCity ? data.address : 'Currect Location'}</span>
           <span className="text-highlight text-lg text-center">{data.currentConditions.conditions}</span>
 
-          <Image src={`/weather-app-icon/${data.currentConditions.icon}.svg`} alt={"weather-icon"} width={0} height={0} className="mt-9 mb-3 size-22" />
+          <Image src={`/weather-app-icon/${data.currentConditions.icon}.svg`} alt={"weather-icon"} width={0} height={0} loading="eager" className="mt-9 mb-3 size-22" />
           <span className="text-3xl font-semibold">{data.currentConditions.temp}ºC</span>
 
           <span className="w-full bg-neutral-200 rounded-xl p-3 text-justify text-[1vw] mt-auto">{data.description}</span>
@@ -97,11 +97,11 @@ export default function WeatherWeb({ data, rolling24HoursData, uvindex, searched
             const dayName = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(dayDate)
 
             return (
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center" key={crypto.randomUUID()}>
                 <span className="text-md text-highlight">{dayName}</span>
                 
                 <div className="flex items-center gap-5">
-                  <Image src={`/weather-app-icon/${day.icon}.svg`} alt={"weather-icon"} width={0} height={0} className="my-2 size-8" />
+                  <Image src={`/weather-app-icon/${day.icon}.svg`} alt={"weather-icon"} width={0} height={0} loading="eager" className="my-2 size-8" />
                   <span className="text-md font-semibold w-15 text-end">{day.temp}ºC</span>
                 </div>
               </div>
@@ -116,9 +116,9 @@ export default function WeatherWeb({ data, rolling24HoursData, uvindex, searched
         <div className="flex mt-3 overflow-x-auto overflow-y-hidden gap-10 pb-2">
           {rolling24HoursData.map(hour => {
             return (
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center" key={crypto.randomUUID()}>
                 <span className="text-sm text-highlight">{hour.datetime.slice(0, -3)}</span>
-                <Image src={`/weather-app-icon/${hour.icon}.svg`} alt={"weather-icon"} width={0} height={0} className="my-2 size-10" />
+                <Image src={`/weather-app-icon/${hour.icon}.svg`} alt={"weather-icon"} width={0} height={0} loading="eager" className="my-2 size-10" />
                 <span className="text-sm font-semibold">{hour.temp}ºC</span>
               </div>
             )

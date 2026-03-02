@@ -35,7 +35,7 @@ export default function Form() {
   return(
     <div className="bg-main shadow-lg hover:shadow-2xl p-5 pt-2 rounded-2xl hover:scale-102 ease-in transition-all lg:px-5 w-full">
       <div className="flex gap-3 justify-center my-7">
-        <Image src="/weather-app-icon/partly-cloudy-day.svg" alt="Logo" width={90} height={90} />
+        <Image src="/weather-app-icon/partly-cloudy-day.svg" alt="Logo" width={90} height={90} loading="eager"/>
         <h1 className="text-center text-2xl mt-5 font-mulish font-bold">WeaPredict</h1>
       </div>
 

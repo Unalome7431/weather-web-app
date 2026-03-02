@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation"
 import { useQuery } from '@tanstack/react-query'
 import axios from "axios"
+import { useRouter } from "next/navigation"
 import { WeatherData } from "@/app/interface/WeatherBase"
 import CustomSpinner from "../CustomSpinner"
 import WeatherPhone from "./WeatherPhone"
@@ -13,6 +14,8 @@ export default function Weather() {
   const searchedCity = searchParams.get('searchCity')
   const lat = searchParams.get('lat')
   const lon = searchParams.get('lon')
+
+  const router = useRouter()
 
   const { data, isLoading, error } = useQuery<WeatherData>({
     queryKey: ['weather', searchedCity, lat, lon],
@@ -27,7 +30,6 @@ export default function Weather() {
     enabled: !!searchedCity || (!!lat && !!lon)
   })
 
-  if (!searchedCity && (!lat && !lon)) return <div>Location not found</div>
   if (isLoading) {
     return (
       <div className="h-dvh flex flex-col gap-2 justify-center items-center"> 
@@ -36,7 +38,7 @@ export default function Weather() {
       </div>
     )
   }
-  if (error) return <div>Error occured</div>
+  if ((!searchedCity && (!lat && !lon)) || error) router.push('/notfound')
   if (!data) return null
 
   const next2DaysData = [...data.days[0].hours, ...data.days[1].hours]
@@ -58,7 +60,7 @@ export default function Weather() {
   } else if (data.currentConditions.uvindex >= 11) {
     uvindex = 'Extreme'
   }
-  
+
   return (
     <>
       <WeatherPhone data={data} rolling24HoursData={rolling24HoursData} uvindex={uvindex} searchedCity={searchedCity ?? undefined} />
